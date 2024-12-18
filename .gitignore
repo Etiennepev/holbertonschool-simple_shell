@@ -1,0 +1,12 @@
+# Ignore everything by default
+*
+
+# Allow specific file types
+!*.c
+!*.h
+!.gitignore
+!README*
+
+# Ignorer tout dans le dossier
+Concept/
+Concept/*
