@@ -9,7 +9,7 @@
 
 char **split_strings(char *str);
 char *read_line(void);
-int execute_command(void);
-int prompt(void);
+int execute_command(char **command_args);
+int main(void);
 
 #endif

@@ -11,33 +11,33 @@
  * Frees allocated memory before exiting.
  */
 
-int prompt(void)
+int main(void)
 {
-	char *buffer = NULL;
-	size_t buffsize;
-	char *character;
+	char *character = NULL;
+	char **parsed_args;
 
 	while (1)
 	{
 		printf("#cisfun$ ");
 
-		character = read_line();
+	
 
-		split_strings(character);
+		parsed_args = split_strings(character);
 
-		if (split_strings(character) == -1)
+		if (parsed_args == NULL)
 		{
-			printf("\n");
-			break;
+			perror("Error\n");
+			continue;
 		}
-		printf("%s", buffer);
-
-		if (strcmp(buffer, "exit\n") == 0)
+		if (strcmp(parsed_args[0], "exit") == 0)
 		{
-			free(buffer);
-			break;
+			free(character);
+			free(parsed_args);
 		}
+		execute_command(parsed_args);
+
+	free(parsed_args);
 	}
-	free(buffer);
+	free(character);
 	return (0);
 }
