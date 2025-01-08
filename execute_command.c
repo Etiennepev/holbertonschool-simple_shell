@@ -1,43 +1,32 @@
 #include "shell.h"
 
 /**
- * execute_command - Executes a command using fork and execve
- *
- * Return: 0 on success, 1 on failure
- *
- * @command_args: The first element is the command to execute, followed by its
- *                arguments.
- *
- * Description: Reads a line of input, splits it into tokens,
- * creates a child process using fork, and executes the command
- * in the child process using execve. Handles errors and frees
- * allocated memory before returning.
+ * execute_command - Exécute une commande.
+ * @args: Tableau de tokens représentant la commande et ses arguments.
  */
-
-int execute_command(char *parsed_args[])
+int execute_command(char **args)
 {
-	pid_t pid;
-	int status;
+    pid_t child_pid;
+    int status;
 
-	parsed_args = split_strings(read_line());
-	if (parsed_args == NULL)
-		return (1);
+    child_pid = fork();
+    if (child_pid == -1)
+    {
+        perror("Failed to create process");
+        exit(41);
+    }
 
-	pid = fork();
-	if (pid == -1)
-	{
-		free(parsed_args);
-		return (1);
-	}
-	if (pid == 0)
-	{
-		if (execve(parsed_args[0], parsed_args, NULL) == -1)
-		{
-			perror("Error");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-		wait(&status);
+    if (child_pid == 0)
+    {
+        if (execve(args[0], args, NULL) == -1)
+        {
+            perror("Failed to execute");
+            exit(97);
+        }
+    }
+    else
+    {
+        wait(&status);
+    }
 	return (0);
 }

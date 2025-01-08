@@ -11,33 +11,34 @@
  * Frees allocated memory before exiting.
  */
 
-int main(void)
+/**
+ * main - Point d'entrée du shell.
+ * @argc: Nombre d'arguments.
+ * @argv: Tableau des arguments.
+ *
+ * Return: Toujours 0.
+ */
+int main(int argc, char **argv)
 {
-	char *character = NULL;
-	char **parsed_args;
+	char *str;
+    char **args;
 
-	while (1)
-	{
-		printf("#cisfun$ ");
+    (void)argc;
+    (void)argv;
 
-	
+    while (1)
+    {
+        write(1, "#cisfun$ ", 9);
+ 		
+        str = read_input_line();
+        args = split_strings(str);
 
-		parsed_args = split_strings(character);
+        if (args[0] != NULL)
+            execute_command(args);
 
-		if (parsed_args == NULL)
-		{
-			perror("Error\n");
-			continue;
-		}
-		if (strcmp(parsed_args[0], "exit") == 0)
-		{
-			free(character);
-			free(parsed_args);
-		}
-		execute_command(parsed_args);
+        free(args);
+        free(str);
+    }
 
-	free(parsed_args);
-	}
-	free(character);
-	return (0);
+    return 0;
 }

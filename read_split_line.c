@@ -1,26 +1,24 @@
 #include "shell.h"
 
 /**
- * read_line - Reads a line of input from standard input
+ * read_input_line - Lit une ligne depuis l'entrée standard.
  *
- * Return: Pointer to the line read, or NULL on failure
- *
- * Description: Uses getline to read a line from stdin.
- * Allocates memory for the buffer dynamically. Frees the buffer
- * and returns NULL if getline fails.
+ * Return: La ligne lue (doit être libérée par l'appelant).
  */
-
-char *read_line(void)
+char *read_input_line(void)
 {
-	char *buffer = NULL;
-	size_t buffsize;
+    char *buf = NULL;
+    size_t count = 0;
+    ssize_t nread;
 
-	if (getline(&buffer, &buffsize, stdin) == -1)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	return (buffer);
+    nread = getline(&buf, &count, stdin);
+    if (nread == -1)
+    {
+        perror("Exiting shell");
+        free(buf);
+        exit(1);
+    }
+    return buf;
 }
 
 /**
@@ -28,38 +26,43 @@ char *read_line(void)
  * @str: String to be split
  *
  * Return: Pointer to an array of tokens, or NULL on failure
- *
- * Description: Reads a line of input, allocates memory for
- * an array of tokens, and splits the string using spaces as
- * delimiters. Handles memory allocation errors.
  */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 
 char **split_strings(char *str)
 {
-	char **tokens_array;
-	char *token;
-	int i = 0;
+    char **tokens_array = malloc(sizeof(char *) * 10);
+    char *token;
+    int i = 0, capacity = 10;
 
-	str = read_line();
-	if (str == NULL)
-		return (NULL);
+    if (tokens_array == NULL)
+    {
+        perror("Malloc failed");
+        exit(1);
+    }
 
-	tokens_array = malloc((25) * sizeof(char *));
-	if (tokens_array == NULL)
-	{
-		free(str);
-		return (NULL);
-	}
-	token = strtok(str, " ");
-	if (tokens_array == NULL)
-		return (NULL);
+    token = strtok(str, " \n");
+    while (token)
+    {
+        if (i >= capacity)
+        {
+            capacity *= 2;
+            tokens_array = _realloc(tokens_array, sizeof(char *) * i, sizeof(char *) * capacity);
+            if (tokens_array == NULL)
+            {
+                perror("Realloc failed");
+                exit(1);
+            }
+        }
+        tokens_array[i] = token;
+        token = strtok(NULL, " \n");
+        i++;
+    }
+    tokens_array[i] = NULL;
 
-	while (token)
-	{
-		tokens_array[i] = token;
-		i++;
-		token = strtok(NULL, " ");
-	}
-	tokens_array[i] = NULL;
-	return (tokens_array);
+    return (tokens_array);
 }
