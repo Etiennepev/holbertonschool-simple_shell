@@ -1,22 +1,11 @@
 #include "shell.h"
 
 /**
- * prompt - Displays a prompt and handles user input
+ * main - input.
+ * @argc: Numbers of args.
+ * @argv: Array of args.
  *
- * Return: 0 on success
- *
- * Description: Continuously displays a shell prompt "#cisfun$ ",
- * reads user input, splits it into tokens, and handles commands.
- * Exits the loop if the user types "exit\n" or if an error occurs.
- * Frees allocated memory before exiting.
- */
-
-/**
- * main - Point d'entrée du shell.
- * @argc: Nombre d'arguments.
- * @argv: Tableau des arguments.
- *
- * Return: Toujours 0.
+ * Return: Always 0.
  */
 int main(int argc, char **argv)
 {

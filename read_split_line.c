@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * read_input_line - Lit une ligne depuis l'entrée standard.
+ * read_input_line - read a line from the input.
  *
- * Return: La ligne lue (doit être libérée par l'appelant).
+ * Return: line read.
  */
 char *read_input_line(void)
 {
