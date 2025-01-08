@@ -1,10 +1,8 @@
 #include "shell.h"
 
 /**
- * execute_command - Exécute une commande.
- * @args: Tableau de tokens représentant la commande et ses arguments.
- *
- * Return: 0
+ * execute_command - Execute a command.
+ * @args: An array of tokens represent the command of args.
  */
 int execute_command(char **args)
 {

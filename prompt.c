@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * main - Point d'entrée du shell.
- * @argc: Nombre d'arguments.
- * @argv: Tableau des arguments.
+ * main - input.
+ * @argc: Numbers of args.
+ * @argv: Array of args.
  *
- * Return: Toujours 0.
+ * Return: Always 0.
  */
 int main(int argc, char **argv)
 {
