@@ -10,24 +10,24 @@
 int main(int argc, char **argv)
 {
 	char *str;
-    char **args;
+	char **args;
 
-    (void)argc;
-    (void)argv;
+	(void)argc;
+	(void)argv;
 
-    while (1)
-    {
-        write(1, "#cisfun$ ", 9);
- 		
-        str = read_input_line();
-        args = split_strings(str);
+	while (1)
+	{
+		printf("#cisfun$ ");
 
-        if (args[0] != NULL)
-            execute_command(args);
+		str = read_input_line();
+		args = split_strings(str);
 
-        free(args);
-        free(str);
-    }
+		if (args[0] != NULL)
+			execute_command(args);
 
-    return 0;
+		free(args);
+		free(str);
+	}
+
+	return (0);
 }
