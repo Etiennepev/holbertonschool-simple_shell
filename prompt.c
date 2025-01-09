@@ -24,10 +24,9 @@ int main(int argc, char **argv)
 
 		if (args[0] != NULL)
 			execute_command(args);
-
-		free(args);
-		free(str);
+		free_array(args);
 	}
+	free(str);
 
 	return (0);
 }
