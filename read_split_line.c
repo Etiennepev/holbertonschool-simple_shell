@@ -16,7 +16,7 @@ char *read_input_line(void)
 	{
 		perror("Exiting shell");
 		free(buf);
-		exit(1);
+		exit(0);
 	}
 	return (buf);
 }
@@ -34,37 +34,35 @@ char *read_input_line(void)
 
 char **split_strings(char *str)
 {
-	char **tokens_array = malloc(sizeof(char *) * 10);
+	char **tokens_array = malloc(strlen(str) * sizeof(char *));
 	char *token;
-	int i = 0, capacity = 10;
-	size_t new_size, old_size;
+	int i = 0;
+	
 
 	if (tokens_array == NULL)
 	{
 		perror("Malloc failed");
-		exit(1);
+		exit(0);
 	}
 
-	token = strtok(str, " \n");
+	token = strtok(str, " ");
 	while (token)
 	{
-		if (i >= capacity)
+		tokens_array[i] = strdup(token);
+		if (tokens_array[i])
 		{
-			capacity *= 2;
-			old_size = sizeof(char *) * i;
-			new_size = sizeof(char *) * capacity;
-
-			tokens_array = _realloc(tokens_array, old_size, new_size);
-			if (tokens_array == NULL)
+			while (i >= 0)
 			{
-				perror("Realloc failed");
-				exit(1);
+				free(tokens_array[i]);
+				i--;
 			}
+			free(tokens_array);
+			return (NULL);
 		}
-		tokens_array[i] = token;
 		token = strtok(NULL, " \n");
 		i++;
 	}
+
 	tokens_array[i] = NULL;
 
 	return (tokens_array);
