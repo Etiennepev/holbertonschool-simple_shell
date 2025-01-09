@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * read_input_line - read a line from the input.
  *
@@ -18,52 +17,53 @@ char *read_input_line(void)
 		free(buf);
 		exit(0);
 	}
+	if (nread > 0 && buf[nread - 1] == '\n')
+		buf[nread - 1] = '\0';
 	return (buf);
 }
-
 /**
  * split_strings - Splits a string into an array of tokens
  * @str: String to be split
  *
  * Return: Pointer to an array of tokens, or NULL on failure
  */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 char **split_strings(char *str)
 {
-	char **tokens_array = malloc(strlen(str) * sizeof(char *));
-	char *token;
-	int i = 0;
-	
+	char *token = NULL;
+	char **array = NULL;
+	size_t capacity = 10;
+	size_t i = 0;
+	size_t k;
 
-	if (tokens_array == NULL)
+	array = malloc(sizeof(char *) * capacity);
+	if (array == NULL)
 	{
 		perror("Malloc failed");
-		exit(0);
+		exit(1);
 	}
-
 	token = strtok(str, " ");
-	while (token)
+	while (token != NULL)
 	{
-		tokens_array[i] = strdup(token);
-		if (tokens_array[i])
+		if (i >= capacity)
+			capacity *= 2;
+		if (i >= capacity)
 		{
-			while (i >= 0)
+			char **new_array = malloc(sizeof(char *) * capacity);
+
+			if (new_array == NULL)
 			{
-				free(tokens_array[i]);
-				i--;
+				perror("Malloc failed");
+				exit(1);
 			}
-			free(tokens_array);
-			return (NULL);
+			for (k = 0; k < i; k++)
+				new_array[k] = array[k];
+			free(array);
+			array = new_array;
 		}
-		token = strtok(NULL, " \n");
+		array[i] = token;
 		i++;
+		token = strtok(NULL, " ");
 	}
-
-	tokens_array[i] = NULL;
-
-	return (tokens_array);
+	array[i] = NULL;
+	return (array);
 }
