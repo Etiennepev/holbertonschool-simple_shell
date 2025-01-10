@@ -6,6 +6,8 @@
 !*.h
 !.gitignore
 !README*
+!Authors
+!man_1_simple_shell
 
 # Ignorer tout dans le dossier
 Concept/
