@@ -1,0 +1,23 @@
+.TH simple_shell 1
+.SH NAME
+simple_shell is an interpreteur of command
+.SH DESCRIPTION
+.B simple_shell
+is a minimalist command interpreter designed to execute commands from the command line.
+.SH EXAMPLES
+.TP
+Display the shell :
+.B simple_shell
+.SH
+Execute a specifique command:
+.B ./hsh "ls \-l"
+.SH USE
+.Pp
+to use it we need to clone it with:
+.SH 
+git clone 	
+compil it and launch him with the command: ./hsh
+.SH AUTHORS
+Étienne Loichot
+.SH
+Erwan Tixerand
