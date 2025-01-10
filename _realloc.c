@@ -1,42 +1,53 @@
 #include "shell.h"
 
 /**
- * _realloc - Reallocate a memory block.
- * @ptr: Pointer to the previously allocated memory block.
- * @old_size: Size of the old memory block in bytes.
- * @new_size: Size of the new memory block in bytes.
- *
- * Return: Pointer to the newly allocated memory block,
- *         or NULL if the allocation fails or new_size is 0 and ptr is not NULL.
- */
+ * *_realloc - reallocates a memory block using malloc and free.
+ * @ptr : pointer to the memory previously allocated.
+ * @old_size :  is the size, in bytes, of the allocated space for ptr.
+ * @new_size : is the new size, in bytes of the new memory block.
+ * Return: the pointer to the new memory block of NULL if error.
+ **/
+
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-    char *new_ptr;
-    unsigned int i;
-   
-    if (new_size == 0 && ptr != NULL)
-    {
-        free(ptr);
-        return (NULL);
-    }
-    if (ptr == NULL)
-    {
-        new_ptr = malloc(new_size);
-        if (new_ptr == NULL)
-            return (NULL);
-        return (new_ptr);
-    }
-    if (new_size == old_size)
-        return (ptr);
+	void *new_ptr;
+	unsigned int min_size;
 
-    new_ptr = malloc(new_size);
-    if (new_ptr == NULL)
-        return (NULL);
+	if (new_size == old_size)
+	{
+		return (ptr);
+	}
+	if (ptr == NULL)
+		return (malloc(new_size));
+	if (new_size == 0 && ptr != NULL)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	new_ptr = malloc(new_size);
+		if (new_ptr == NULL)
+			return (NULL);
+		min_size = old_size < new_size ? old_size : new_size;
+		_memcpy(new_ptr, ptr, min_size);
+		free(ptr);
+	return (new_ptr);
+}
 
-    for (i = 0; i < old_size && i < new_size; i++)
-        new_ptr[i] = ((char *)ptr)[i];
+/**
+ * _memcpy - copies memory area.
+ * @dest: memory area of destination.
+ * @n: number of byte to copy.
+ * @src : memory area to copy.
+ * Return: a pointer to the memory area dest.
+ **/
 
-    free(ptr);
+char *_memcpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int i;
 
-    return (new_ptr);
+	for (i = 0; i < n; i++)
+	{
+		dest[i] = src[i];
+	}
+	return (dest);
 }

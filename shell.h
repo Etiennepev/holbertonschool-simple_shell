@@ -8,10 +8,16 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-char **split_strings(char *str);
-char *read_input_line(void);
-int execute_command(char **args);
-int main(int argc, char **argv);
+
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char *_memcpy(char *dest, char *src, unsigned int n);
+void exit_builtin(char **args, char *input);
+void _env(char **envp);
+int main(int argc, char **argv, char *envp[]);
+ssize_t read_input(char **input, size_t *len);
+char **split_input(char *input);
+void execute_command(char **args, char *envp[], char *input);
+char *manage_path(char *envp[], char *file_name);
+char *_getenv(char *envp[]);
 
 #endif
