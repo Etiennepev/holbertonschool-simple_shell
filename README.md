@@ -6,26 +6,20 @@ This Simple Shell is a little recreation of the terminal of Shell in C language 
 
 
 ## Features and command supported
+
 he can do command located in the directory $PATH
 
 
+# 📄 Files
 
-# 📄 files
+| Files                   | Description                                                                     |
+|:------------------------|:--------------------------------------------------------------------------------|
+|_getenv.c                |will get the value of an environment to search in the command wanted.            |
+|_realloc.c               |will reallocate a memory block and copies memory area.                           | 
+|built_in_command.c       |print the current environment,  free args and do an exit.                        |
+|prompt.c                 |containt the boucle of the shell, divide, find the path of a command and divide. |
+|shell.h                  |header file that contain function librairies and prototype that we use.          |
 
-| Files                   | Description                                                             |
-|:------------------------|:------------------------------------------------------------------------|
-|shell.h                  |header file that contain function librairies and prototype.              |
-|prompt.c                 |containt what will we write in the start of the loop who waiting a input.|
-|execute_command.c        |will execute the input that he will receive.                             | 
-|get_file_path.c          |will take the file to the directory PATH to search the command.          |
-|_getenv.c                |will get the environmentto search in.                                    |
-|_realloc.c               |he will reallocate the size we need                                      |
-
-## exemples
-
-```c
-
-```
 
 ## ⬇️This is how to do the installation we need to clone the repository
 
@@ -65,3 +59,5 @@ this little shell can use only command in the $PATH directory
 
 **Erwan Tixerand**
 - [GitHub](https://github.com/ertix222)
+
+[Authors](https://github.com/Etiennepev/holbertonschool-simple_shell/blob/main/Authors)
