@@ -23,7 +23,7 @@ char *get_file_path(char *file_name)
 	directory = strtok(path, ":");
 	while (directory != NULL)
 	{
-		len = strlen(directory + strlen(file_name) + 2);
+		len = strlen(directory) + strlen(file_name) + 2;
 		full_path = malloc(len);
 		if (!full_path)
 		{
