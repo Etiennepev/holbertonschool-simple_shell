@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /*
-* main - infinite boucle of the shell.
+* main - infinite loop of the shell.
 * @argc : number of arguments.
 * @argv : array of string of arguments.
 * @envp : array of environnement variable.
