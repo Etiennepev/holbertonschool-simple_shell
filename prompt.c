@@ -227,7 +227,7 @@ char *manage_path(char *envp[], char *file_name)
 		strcpy(absolute_path, token);
 		strcat(absolute_path, "/");
 		strcat(absolute_path, file_name);
-		if (access(absolute_path, X_OK))
+		if (access(absolute_path, X_OK) == 0)
 		{
 			free(path_copy);
 			return (absolute_path);
