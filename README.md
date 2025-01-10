@@ -48,9 +48,11 @@ this little shell can use only command in the $PATH directory
 
 # Flowchart
 
+![flowchart projet](https://github.com/user-attachments/assets/1f0b0a2d-d120-40a6-96b1-539655a70242)
 
 # Man page
 
+![Man Page Simple_shell](https://github.com/user-attachments/assets/f2c977ed-09bf-40b3-8e68-e74ea16aa4a7)
 
 ## Authors
 
